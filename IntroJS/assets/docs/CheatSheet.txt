@@ -1,0 +1,8 @@
+- Historia de JS
+- Uso de JS en la  industria actual
+- "Hola Mundo" en JS
+-  Creación de Variables y Constantes
+- Intro 'consola de JS'
+- Depuración y breakpoints
+- Problemas con la declaración de variables con VAR
+- Prompts, alerts, confirms.
