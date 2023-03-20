@@ -1,8 +1,8 @@
-- Historia de JS
-- Uso de JS en la  industria actual
-- "Hola Mundo" en JS
--  Creación de Variables y Constantes
-- Intro 'consola de JS'
-- Depuración y breakpoints
+--> Temas principales a tener en cuenta <--
+
+- Hola Mundo en JavaScript
+- Declaración de las variables (tipos, scope)
 - Problemas con la declaración de variables con VAR
+- Consola de JS
+- Depuración y breakpoints
 - Prompts, alerts, confirms.

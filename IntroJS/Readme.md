@@ -17,7 +17,11 @@ Pues resulta que a inicios de los años 90, la velocidad máxima de los módems 
 2. Relleno, por ejemplo, un formulario de registro. Después de haber enviado el formulario con los datos, me doy cuenta de que se me olvido poner mi appellido pues, el servidor se da cuenta de ello y me vuelve a enviar el formulario solicidando el campo requerido..
 
 3. Cada acción errónea del cliente se convertía en una petición HTTP innecesaria al servidor (que era incargado de validar la entrada de los datos, validarlos y las peticiones varias).
+
+
 ```
+
+                                Logic to Web --> IF THIS HAPPEND, DO THIS
 
 Consciente de ello, <b>[Brendan Eich](https://es.wikipedia.org/wiki/Brendan_Eich)</b> junto con la companía Netscape crearon JS que funcionaba del lado del cliente permitiendo enviar informaciones lo más procesado posible al servidor para que éste sólo se encarge de trabajar con los datos validados y que sea la propia interfaz quien "tenga que interactuar con el cliente/usuario" dando la mejor experiencia posible.
 
@@ -39,3 +43,17 @@ Consciente de ello, <b>[Brendan Eich](https://es.wikipedia.org/wiki/Brendan_Eich
 \*\*ES5: El código escrito con la versión 5, solo sirve para navegadores antiguos, los más modernos no los soportan.
 
 \*\*ES6: Con la aparición de los "Polyfills" con la versión ES6 podemos ejecutar el JavaScript moderno en los navegadores viejos sin problema.
+
+# JavaScript en la Actualidad
+
+Hace años, como se mencionó anteriormente, JS era diseñado para ejecutarse solamente dentro de los navegadores. Pero hoy por hoy, no importa si tu servidor está escrito en PHP, Python, Java... si quieres crear una aplicación web necesitarás JavaScript el 99% de las veces. Además, gracias a las tecnologías como Node JavaScript puede ejecutarse de manera independiente a los servidores web.
+
+<h3>Usos</h3>
+
+- Aplicaciones Web: Dashboard administrativo, maps..
+
+- Presentaciones con todas sus animaciones..
+
+- Web Servers: con Nodejs (administrar peticiones, conectarnos a la base de datos, recuperar informaciones, automatización de los flujos, crear archivos en el file system, video juegos, etc)
+
+- Aplicaciones móviles: con otros frameworks: ionic, React Native, NativeScript, electron
