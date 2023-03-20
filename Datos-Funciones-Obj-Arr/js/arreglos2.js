@@ -29,6 +29,9 @@ let arregloNew = [
 //   arregloNew,
 // });
 
+// O modificarlo directamente de esta forma
+//  arregloNew[0] = "Hello World";
+
 // //Reescribimos y añadimos un nuevo elemento al principio
 // nuevaCosa = arregloNew.unshift("Fire Emblem");
 
