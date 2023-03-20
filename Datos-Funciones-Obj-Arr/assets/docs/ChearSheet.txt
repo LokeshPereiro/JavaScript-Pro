@@ -1,0 +1,11 @@
+--> Temas principales a revisar <--
+
+- ¿ Qué son los datos priimitivos ?
+
+- Palabaras reservadas 
+
+- Arreglos
+
+-  Objetos literales
+
+- Funciones (básicas, flecha, retorno de las funciones)
