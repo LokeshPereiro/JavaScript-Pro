@@ -1,0 +1,14 @@
+
+- Estructuras de control de flujo
+- Paso de variables por valor y por referencia
+- Romper referencia de objetos
+- If y Else
+- Lógica booleana
+- Operadores  y  operadores de asignación
+- Diferentes  usos  del operador condicional ternario
+- Switch
+- While
+- Do WhileFor
+- For 
+    - For in
+    - For of
