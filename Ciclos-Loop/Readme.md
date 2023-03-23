@@ -104,3 +104,5 @@ console.log(returnTrue() || returnFalse());
 // Solo va a ser false cuando ambas condiciones sean falsas
 console.log(!returnTrue() || returnFalse());
 ```
+
+## Operador Ternario
