@@ -4,11 +4,11 @@
  */
 
 //Creamos esa condición de la tienda
-const dia = 3;
-const horaActual = 8;
+const dia = 6;
+const horaActual = 10;
 
 let horaApertura;
-let mensaje; //Está abierto, Está cerrado, hoy abrimos a las x
+let mensaje;
 
 //1era OPCION
 // Comprobar el día
@@ -34,7 +34,7 @@ mensaje =
   horaActual >= horaApertura
     ? "Estamos abiertos"
     : `Está cerrado, hoy abrimos a las ${horaApertura}`;
-// console.log(mensaje);
+console.log(mensaje);
 
 // ---------------------- PRO ternario ----------------------
 
@@ -64,8 +64,8 @@ const amigosArr = [
 ];
 console.log(amigosArr);
 
-const nota = 86; //A+ B+ C+
-const grado =
+const nota = 88; //A+ B+ C+
+const puntuacion =
   nota >= 95
     ? "A+"
     : nota >= 90
@@ -80,4 +80,4 @@ const grado =
     ? "C"
     : "F";
 
-console.log({ nota, grado });
+console.log({ nota, puntuacion });

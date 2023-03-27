@@ -1,6 +1,6 @@
 ## Variables por VALOR y por REFERENCIA
 
-Cuando estamos trabajando con los primitivos (string, number..), cualquier tipo de asignacion o cuando las mandamos a una funcion como un argumento.. <b>LO ESTAMOS MANDANDO POR VALOR</b>
+Cuando estamos trabajando con los primitivos (string, number..), cualquier tipo de asignación o cuando las mandamos a una funcion como un argumento.. <b>LO ESTAMOS MANDANDO POR VALOR</b>
 
 - NO importa si tranformamos la variable, o le damos un valor distinto al original no importa, el valor siempre va a ser lo que le definamos
 
@@ -106,3 +106,143 @@ console.log(!returnTrue() || returnFalse());
 ```
 
 ## Operador Ternario
+
+El operador condicional ternario, a groso modo, es un "if else"
+
+```javascript
+/*
+ - horaApertura: Entre semana, a las 11:00,
+ - horaApertura: Los findes a las 9:00
+ */
+
+//Creamos esa condición de la tienda
+const dia = 6;
+const horaActual = 10;
+
+let horaApertura;
+let mensaje;
+
+//1era OPCION
+// Comprobar el día
+if (dia === 0 || dia === 6) {
+  console.log("Es **Fin de Semana**");
+  //   horaApertura = 9;
+} else {
+  console.log("~Dia de la Semana~");
+  //   horaApertura = 11;
+}
+
+// if (horaActual >= horaApertura) {
+//   mensaje = "Estamos abiertos";
+// } else {
+//   mensaje = `Está cerrado, hoy abrimos a las ${horaApertura}`;
+// }
+// console.log(mensaje);
+
+// ---------------------  2ª OPCION con el Operador Ternario    ------------------
+horaApertura = [0, 6].includes(dia) ? 9 : 11;
+mensaje =
+  horaActual >= horaApertura
+    ? "Estamos abiertos"
+    : `Está cerrado, hoy abrimos a las ${horaApertura}`;
+console.log(mensaje);
+```
+
+## Switch
+
+La estructura de control SWITCH es muy útil cuando queremos comparar/igualar ( '===' ) a un valor único
+
+```javascript
+switch (dia) {
+  case 0:
+    console.log("Hoy es Domingo");
+    break;
+
+  case 1:
+    console.log("Hoy es Lunes");
+    break;
+
+  case 2:
+    console.log("Hoy es Martes");
+    break;
+
+  case 3:
+    console.log("Hoy es Miercoles");
+    break;
+
+  case 4:
+    console.log("Hoy es Jueves");
+    break;
+
+  case 5:
+    console.log("Hoy es Viernes");
+    break;
+
+  case 6:
+    console.log("Hoy es Sabado");
+    break;
+
+  default:
+    console.log(`No se qué dia es: ${dia}`);
+}
+```
+
+# Ciclos
+
+Los ciclos nos permiten ejecutar todas las funciones y/o condiciones definidas de manera dinámica
+
+### While
+
+```javascript
+// Parecido a if else, switch..
+// Para que la condición sea válida y que se cumpla, la función siempre tiene que devolver un "true"
+// Las condiciones falsas con: false, undefined, null
+const coches = ["Seat", "Cupra", "Ibiza", "Leon"];
+let i = 0;
+
+while (coches[i]) {
+  if (i === 1) {
+    // break;
+    // Es necesario sino caemos en el bucle infinito
+    i++;
+    continue;
+    // Ahora salta la posición 1 --> cupra
+  }
+  console.log(coches[i]);
+  i++;
+}
+
+// # Do While #
+let j = 2;
+// Do siempre se ejecuta, al menos una vez (e.g. undefined), siempre y cuando while sea verdadero
+do {
+  console.log(coches[j]);
+  j++;
+} while (coches[j]);
+```
+
+### For, For In, For Of
+
+```javascript
+const aovHeros = ["Tachi", "Kriknak", "Yena", "Murad"];
+
+// Ciclo For
+for (let i = 0; i < aovHeros.length; i++) {
+  console.log(aovHeros[i]);
+}
+
+// For In --> Es lo mismo que el FOR tradiconal pero el código es más limpio
+for (let i in aovHeros) {
+  // 1 vuelta
+  console.log(aovHeros[i]);
+  //   4 vueltas
+  //   for (let j in aovHeros) {
+  //     console.log(aovHeros[j]);
+  //   }
+}
+
+// For of --> Es casi lo mismo que los anteriores pero el "for of" se usa normalmente para obtener lasd referencias de valor de los objetos, arr
+for (let hero of aovHeros) {
+  console.log(hero);
+}
+```

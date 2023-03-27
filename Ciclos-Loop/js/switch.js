@@ -1,7 +1,5 @@
 const dia = 6;
 
-// ===, es igual que, SWITCH cuando queremos igual a un valor único
-
 switch (dia) {
   case 0:
     console.log("Hoy es Domingo");
