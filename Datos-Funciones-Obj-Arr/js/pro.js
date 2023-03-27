@@ -1,5 +1,4 @@
 // # Retornar un obj con la info
-
 // function crearPersona(nombre, apellido) {
 //   return {
 //     nombre,
@@ -9,7 +8,6 @@
 
 //En el Arrow function
 const crearPersona = (nombre, apellido) => ({
-  // Desde ECMA6, si el nombre de la propiedad y el nombre de la variable, no hay falta ponerlo 2x veces
   //Si quitamos el return, es necesario, (), sino nos devuelve undefined
   nombre,
   apellido,
@@ -18,6 +16,7 @@ const crearPersona = (nombre, apellido) => ({
 const persona = crearPersona("Lokesh", "Pereiro");
 console.log(persona);
 
+// Función tradiconal puede recibir múltiples argumentos sin el operador Rest
 // function imprimirArgumento() {
 //   console.log(arguments);
 // }
@@ -27,7 +26,7 @@ const imprimirArgumentoArrow = (...args) => {
   //   console.log(args);
   return args;
 };
-// imprimirArgumento("Lokesh", 44, true);
+// imprimirArgumento("Lokesh", 44, true);s
 // imprimirArgumentoArrow("Lokesh", 44, true);
 
 // Puedo asignar una propiedad a cada una de esos argumentos
