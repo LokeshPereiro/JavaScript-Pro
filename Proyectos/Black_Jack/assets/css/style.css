@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #2f4f30;
+  color: white;
+  box-sizing: border-box;
+}
+.title {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.cartas {
+  position: relative;
+  width: 150px;
+  left: 100px;
+  margin-left: -75px;
+}
+#player-cards,
+#computer-cards {
+  height: 240px;
+}

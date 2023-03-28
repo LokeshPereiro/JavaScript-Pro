@@ -1,1 +1,1 @@
-# Back Jack JavaScript project
+# Black Jack JavaScript project
