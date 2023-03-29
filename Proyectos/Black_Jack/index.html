@@ -13,13 +13,17 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-umd-min.js"
+      defer
+    ></script> -->
   </head>
   <body>
     <header class="title">Black Jack</header>
-    <!-- Div with 3btns -->
+    <!-- Div con 3 action btns -->
     <div class="row mt-2">
       <div id="divBtns" class="col text-center">
-        <button id="btnStart" class="btn btn-success">New Game</button>
+        <button id="btnNew" class="btn btn-success">New Game</button>
         <button id="btnAsk" class="btn btn-warning">Ask Card</button>
         <button id="btnStop" class="btn btn-danger">Stop Game</button>
       </div>
@@ -30,21 +34,11 @@
       <div class="col">
         <h1>Player - <small>0</small></h1>
         <div id="player-cards">
-          <img
+          <!-- <img
             class="cartas"
             src="assets/cartas/2C.png"
             alt="black jack cards"
-          />
-          <img
-            class="cartas"
-            src="assets/cartas/2C.png"
-            alt="black jack cards"
-          />
-          <img
-            class="cartas"
-            src="assets/cartas/2C.png"
-            alt="black jack cards"
-          />
+          /> -->
         </div>
       </div>
     </div>
@@ -54,24 +48,15 @@
       <div class="col">
         <h1>Computer - <small>0</small></h1>
         <div id="computer-cards">
-          <img
+          <!-- <img
             class="cartas"
             src="assets/cartas/3C.png"
             alt="black jack cards"
-          />
-          <img
-            class="cartas"
-            src="assets/cartas/3C.png"
-            alt="black jack cards"
-          />
-          <img
-            class="cartas"
-            src="assets/cartas/3C.png"
-            alt="black jack cards"
-          />
+          /> -->
         </div>
       </div>
     </div>
-    <script src="js/app.js"></script>
+    <script src="js/underscore_min.js" defer></script>
+    <script src="js/app.js" defer></script>
   </body>
 </html>
