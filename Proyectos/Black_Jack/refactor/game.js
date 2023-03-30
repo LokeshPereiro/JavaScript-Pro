@@ -1,76 +1,89 @@
-(() => {
+const start = (() => {
   ("use strict");
 
-  const tipos = ["C", "D", "H", "S"];
-  const losReyes = ["J", "Q", "K", "A"];
   let deck = [];
+  // Optimizacion: Si hay dos variables del mismo tipo podemos obviar el siguiete a través de 'una coma'
+  const tipos = ["C", "D", "H", "S"],
+    losReyes = ["J", "Q", "K", "A"];
 
-  const newBtn = document.querySelector("#btnNew");
-  const askBtn = document.querySelector("#btnAsk");
-  const stopBtn = document.querySelector("#btnStop");
-  const scoresHtml = document.querySelectorAll("small");
-  const displayinPlayerCards = document.querySelector("#player-cards");
-  const displayinCPUCards = document.querySelector("#computer-cards");
+  let playersPoints = [];
 
-  let puntosJugador = 0,
-    puntosCPU = 0;
+  const newBtn = document.querySelector("#btnNew"),
+    askBtn = document.querySelector("#btnAsk"),
+    stopBtn = document.querySelector("#btnStop");
 
-  console.warn("------ Create Cards Deck/Baraja ------");
+  const scoresHtml = document.querySelectorAll("small"),
+    divCartas = document.querySelectorAll(".divCartas");
+
+  //  "------ Funcion iniciadora del juego ------";
+  const initGame = (numPlayers = 2) => {
+    deck = createDeck();
+    playersPoints = [];
+    // El último jugador siempre va a ser el CPU
+    for (let i = 0; i < numPlayers; i++) {
+      playersPoints.push(0);
+    }
+    scoresHtml.forEach((ele) => (ele.innerText = 0));
+    divCartas.forEach((ele) => (ele.innerText = ""));
+
+    askBtn.disabled = false;
+    stopBtn.disabled = false;
+  };
+
+  //  "------ Create Cards Deck/Baraja ------";
   const createDeck = () => {
+    // Esta función solo se debería de ocupar en crear la deck y hacer el return del deck mezclado
+    deck = [];
     for (let i = 2; i <= 10; i++) {
-      // deck.push(i + "C");
       for (const tipo of tipos) {
         deck.push(i + tipo);
       }
     }
-    // Hago lo mismo con las cartas de los reyes
     for (const reyes of losReyes) {
       for (const tipo of tipos) {
         deck.push(reyes + tipo);
       }
     }
-    // _.shuffle importar del underscore
-    deck = _.shuffle(deck);
-    console.log(deck);
-  };
-  createDeck();
-
-  console.warn("------ Ask Card ------");
-  const askCard = () => {
-    // el método del arr .pop() me permite eliminar el último elemento y devolver ese elemento
-    if (deck.length === 0) {
-      throw "Lo siento, no hay más cartas en la baraja!";
-    }
-    const card = deck.pop();
-
-    return card;
-  };
-
-  console.warn("------ Card Value ------");
-  const askedCardValue = (card) => {
-    const valor = card.substring(0, card.length - 1);
-
-    return isNaN(valor) ? (valor === "A" ? 11 : 10) : valor * 1;
+    return _.shuffle(deck);
   };
 
   // ----------- ----------- ----------- ----------- //
 
-  const turnoCPU = (puntosMinimos) => {
-    do {
-      const carta = askCard();
-      puntosCPU = puntosCPU + askedCardValue(carta);
-      // scoresHtml[0] pq hay dos smalls
-      scoresHtml[1].innerText = puntosCPU;
-      // Enseñar las cartas que han salido en la pantalla
-      const imgCards = document.createElement("img");
-      imgCards.src = `assets/cartas/${carta}.png`;
-      imgCards.classList.add("cartas");
-      displayinCPUCards.append(imgCards);
+  console.warn("------ Ask Card ------");
+  const askCard = () => {
+    if (deck.length === 0) {
+      throw "Lo siento, no hay cartas en la baraja!";
+    }
+    return deck.pop();
+  };
 
-      if (puntosMinimos > 21) {
-        break;
-      }
-    } while (puntosCPU < puntosMinimos && puntosMinimos <= 21);
+  // ----------- ----------- ----------- ----------- //
+
+  console.warn("------ Card Value ------");
+  const askedCardValue = (card) => {
+    const valor = card.substring(0, card.length - 1);
+    return isNaN(valor) ? (valor === "A" ? 11 : 10) : valor * 1;
+  };
+
+  // ----------- ----------- ----------- ----------- //
+  //   turno: 0 player, turno: 1 CPU
+  //   Pido la carta como args
+  const acumularPuntos = (carta, turno) => {
+    playersPoints[turno] = playersPoints[turno] + askedCardValue(carta);
+    scoresHtml[turno].innerText = playersPoints[turno];
+    return playersPoints[turno];
+  };
+
+  //   Necesito saber que carta tengo que enseñar y de quien es el turno
+  const crearCartas = (carta, turno) => {
+    const imgCards = document.createElement("img");
+    imgCards.src = `assets/cartas/${carta}.png`;
+    imgCards.classList.add("cartas");
+    divCartas[turno].append(imgCards);
+  };
+
+  const ganadorJuego = () => {
+    const [puntosMinimos, puntosCPU] = playersPoints;
 
     setTimeout(() => {
       if (puntosCPU === puntosMinimos) {
@@ -79,61 +92,63 @@
         alert("Opps! Superaste los 21!");
       } else if (puntosCPU > 21) {
         alert("Felicidades, has ganado!!");
-      } else if (puntosCPU === 21) {
-        alert("CPU Gana!");
-      } else if (puntosCPU > puntosMinimos) {
-        alert("Tienes menos puntos que el CPU");
+      } else {
+        alert("Gana CPU!");
       }
     }, 100);
   };
 
+  const turnoCPU = (puntosMinimos) => {
+    let puntosCPU = 0;
+    do {
+      const carta = askCard();
+      //  playersPoints.length - 1 ya que el último jugador es el CPU
+      const turnCPU = playersPoints.length - 1;
+
+      puntosCPU = acumularPuntos(carta, turnCPU);
+
+      crearCartas(carta, turnCPU);
+
+      if (puntosMinimos > 21) {
+        break;
+      }
+    } while (puntosCPU < puntosMinimos && puntosMinimos <= 21);
+
+    ganadorJuego();
+  };
+
   console.warn("------ Eventos DOM ------");
   askBtn.addEventListener("click", () => {
-    // La funcion de askCard hace el return de la carta
     const carta = askCard();
-    //Jugador vs CPU puntos acumulados
-    puntosJugador = puntosJugador + askedCardValue(carta);
-    // scoresHtml[0] pq hay dos smalls
-    scoresHtml[0].innerText = puntosJugador;
-    // Enseñar las cartas que han salido en la pantalla
-    const imgCards = document.createElement("img");
-    imgCards.src = `assets/cartas/${carta}.png`;
-    imgCards.classList.add("cartas");
-    displayinPlayerCards.append(imgCards);
+    const puntosJugador = acumularPuntos(carta, 0);
+
+    crearCartas(carta, 0);
 
     if (puntosJugador > 21) {
+      askBtn.disabled = true;
+      stopBtn.disabled = true;
       turnoCPU(puntosJugador);
-      askBtn.disabled = true;
-      stopBtn.disabled = true;
     } else if (puntosJugador === 21) {
-      alert("Felicidades, 21!");
       askBtn.disabled = true;
       stopBtn.disabled = true;
+      alert("Felicidades, 21!");
     }
   });
-  // turnoCPU(15);
 
+  // newGame, Stop
   stopBtn.addEventListener("click", () => {
     askBtn.disabled = true;
     stopBtn.disabled = true;
-    turnoCPU(puntosJugador);
+    turnoCPU(playersPoints[0]);
   });
 
-  newBtn.addEventListener("click", () => {
-    // Llamo de nuevo la funcion de crear nuevo deck porque me da un deck nuevo mezclado
-    deck = [];
+  // Exporto esta acción con el modulo en el index.html
 
-    deck = createDeck();
-    puntosCPU = 0;
-    puntosJugador = 0;
+  //   newBtn.addEventListener("click", () => {
+  //     initGame();
+  //   });
 
-    scoresHtml[0].innerText = 0;
-    scoresHtml[1].innerText = 0;
-
-    displayinCPUCards.innerHTML = "";
-    displayinPlayerCards.innerHTML = "";
-
-    askBtn.disabled = false;
-    stopBtn.disabled = false;
-  });
+  return {
+    newGame: initGame,
+  };
 })();

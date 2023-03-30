@@ -24,8 +24,8 @@
     <div class="row mt-2">
       <div id="divBtns" class="col text-center">
         <button id="btnNew" class="btn btn-success">New Game</button>
-        <button id="btnAsk" class="btn btn-warning">Ask Card</button>
-        <button id="btnStop" class="btn btn-danger">Stop Game</button>
+        <button id="btnAsk" disabled class="btn btn-warning">Ask Card</button>
+        <button id="btnStop" disabled class="btn btn-danger">Stop Game</button>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
     <div class="row container">
       <div class="col">
         <h1>Player - <small>0</small></h1>
-        <div id="player-cards">
+        <div id="player-cards" class="divCartas">
           <!-- <img
             class="cartas"
             src="assets/cartas/2C.png"
@@ -47,7 +47,7 @@
     <div class="row container mt-2">
       <div class="col">
         <h1>Computer - <small>0</small></h1>
-        <div id="computer-cards">
+        <div id="computer-cards" class="divCartas">
           <!-- <img
             class="cartas"
             src="assets/cartas/3C.png"
@@ -56,7 +56,14 @@
         </div>
       </div>
     </div>
-    <script src="refactor/underscore_min.js" defer></script>
-    <script src="refactor/game.js" defer></script>
+    <script src="refactor/underscore_min.js"></script>
+    <script src="refactor/game_min.js"></script>
+
+    <script>
+      console.log(start);
+      document.querySelector("#btnNew").addEventListener("click", () => {
+        start.newGame();
+      });
+    </script>
   </body>
 </html>
