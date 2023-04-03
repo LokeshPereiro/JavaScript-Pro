@@ -1,0 +1,8 @@
+1. Diferecia entre el "TextContent", "InnerText" y "InnerHTML"
+ --> TextContent = Devuleve solo el contenido de texto de todos los elementos 
+     html, incluso los ocultos con el CSS. Asignar solo string, texto...
+
+ --> InnerText: Devuleve el contenido de todos los elementos html excepto los  
+     elementos <script> y <style> 
+
+ --> InnerHTML: Me permite insertar elementos HTML y asignar valores (div, <b></b>, etc...)
