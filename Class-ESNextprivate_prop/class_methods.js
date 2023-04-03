@@ -2,10 +2,11 @@
 
 class Persona {
   // Constructor es un método (de POO) que se ejecuta exactamente cuando se crea una instancia de new Persona
-  //   Estas asignaciones son necesarias para darle cobertuara a todo el scope de la clase, es decir, sin ellas los métodos no tendrían ninguna refrencia (no haya ser que lo definamos en los propios métodos)
-  nombre = "";
-  codigo = "";
-  frase = "";
+  // Estas asignaciones, en principio, con tla de declararlas en el contructor llega. No obstante, si aqui tenemos una asignación demas que no tiene el contructor (nos lo asigna igual ya que tiene un scop global dentro de la class).
+  //   nombre = "";
+  //   codigo = "";
+  //   frase = "";
+  hola = "";
 
   //  Podemos pasar valores por defecto (que para JS es undefined) nombre = sin nombre
   constructor(
@@ -24,7 +25,8 @@ class Persona {
   }
   miFrase() {
     //Si quiero llamar al metodo anterior en este..
-    // this.quienSoy();
+    this.quienSoy();
+
     console.log(`${this.codigo} dice: ${this.frase}`);
   }
 }
@@ -35,11 +37,11 @@ const spiderman = new Persona(
   "xyz123",
   "Soy tu amigo Spiderman"
 );
-// const ironman = new Persona("Tony Stark", "adc123", "Yo soy Ironman");
+const ironman = new Persona("Tony Stark", "adc123", "Yo soy Ironman");
 
-// console.log(spiderman);
+console.log(spiderman);
 // console.log(ironman);
 
 /* Métodos de las clases */
 spiderman.quienSoy();
-// spiderman.miFrase();
+ironman.miFrase();
