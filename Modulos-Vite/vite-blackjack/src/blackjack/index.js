@@ -1,5 +1,6 @@
 import _ from "underscore";
 import { crearDeck } from "./useCases/crear_deck";
+import { pedirCarta } from "./useCases/pedir_carta";
 /**
  * 2C = Two of Clubs
  * 2D = Two of Diamonds
@@ -27,15 +28,6 @@ const puntosHTML = document.querySelectorAll("small");
 // Modulo crearDeck
 deck = crearDeck(tipos, especiales);
 
-// Esta función me permite tomar una carta
-const pedirCarta = () => {
-  if (deck.length === 0) {
-    throw "No hay cartas en el deck";
-  }
-  const carta = deck.pop();
-  return carta;
-};
-
 // pedirCarta();
 const valorCarta = (carta) => {
   const valor = carta.substring(0, carta.length - 1);
@@ -45,7 +37,7 @@ const valorCarta = (carta) => {
 // turno de la computadora
 const turnoComputadora = (puntosMinimos) => {
   do {
-    const carta = pedirCarta();
+    const carta = pedirCarta(deck);
 
     puntosComputadora = puntosComputadora + valorCarta(carta);
     puntosHTML[1].innerText = puntosComputadora;
@@ -76,7 +68,7 @@ const turnoComputadora = (puntosMinimos) => {
 
 // Eventos
 btnPedir.addEventListener("click", () => {
-  const carta = pedirCarta();
+  const carta = pedirCarta(deck);
 
   puntosJugador = puntosJugador + valorCarta(carta);
   puntosHTML[0].innerText = puntosJugador;
@@ -110,7 +102,7 @@ btnDetener.addEventListener("click", () => {
 btnNuevo.addEventListener("click", () => {
   console.clear();
   deck = [];
-  deck = crearDeck();
+  deck = crearDeck(tipos, especiales);
 
   puntosJugador = 0;
   puntosComputadora = 0;
