@@ -1,6 +1,5 @@
 import _ from "underscore";
-import { crearDeck } from "./useCases/crear_deck";
-import { pedirCarta } from "./useCases/pedir_carta";
+import { crearDeck, pedirCarta, valorCarta } from "./useCases";
 /**
  * 2C = Two of Clubs
  * 2D = Two of Diamonds
@@ -27,12 +26,6 @@ const puntosHTML = document.querySelectorAll("small");
 
 // Modulo crearDeck
 deck = crearDeck(tipos, especiales);
-
-// pedirCarta();
-const valorCarta = (carta) => {
-  const valor = carta.substring(0, carta.length - 1);
-  return isNaN(valor) ? (valor === "A" ? 11 : 10) : valor * 1;
-};
 
 // turno de la computadora
 const turnoComputadora = (puntosMinimos) => {
