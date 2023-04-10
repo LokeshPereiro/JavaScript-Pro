@@ -44,7 +44,7 @@ class miSingleton {
   }
 }
 
-const instancia1 = new miSingleton("Ironman");
+const instancia1 = new miSingleton("Iceman");
 const instancia2 = new miSingleton("Batman");
 const instancia3 = new miSingleton("BlackPanther");
 
