@@ -1,5 +1,5 @@
 /**
- * @param {Todo} todo
+ * @param {Object} todo
  */
 
 export const createTodo = (todo) => {

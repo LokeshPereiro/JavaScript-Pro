@@ -1,17 +1,18 @@
 import { Todo } from "../todos/models/todo.model";
 
-const Filters = {
+// My filters obj
+export const Filters = {
   All: "all",
   Pending: "pending",
   Completed: "completed",
 };
 
+// Global state that contain all my tasks and filters
 const state = {
   todos: [
     new Todo("Learn Angular"),
     new Todo("Learn TypeScript"),
-    new Todo("Aprender Nextjs"),
-    new Todo("Aprender Python"),
+    new Todo("Learn Nodejs"),
   ],
   // Default selection
   filter: Filters.All,
@@ -19,12 +20,9 @@ const state = {
 
 const initStore = () => {
   // console.log("Hello World 😁");
-  loadStore();
-};
-
-const loadStore = () => {
   if (!localStorage.getItem("myTodos")) return;
 
+  // Destructuring todos arr and filters from LocalStorage
   const { todos = [], filter = Filters.All } = JSON.parse(
     localStorage.getItem("myTodos")
   );
@@ -33,14 +31,15 @@ const loadStore = () => {
 };
 
 const savedStateLocalStorage = () => {
+  // Every new change in state, will be saved in localstorage
   localStorage.setItem("myTodos", JSON.stringify(state));
 };
 
 /**
- *
- * @param {String} descripcion
+//  Asking for args
+ * @param {String} tasks
  * @param {String} todoId
- * @param {String} filter, newFilter
+ * @param {String} filter newFilter arg for filtering funcionality
  */
 
 // Default filter 'All'
@@ -60,10 +59,9 @@ const getAllTodos = (filter = Filters.All) => {
   }
 };
 
-const addTodo = (descripcion) => {
-  // Mandatory to send new todo
-  if (!descripcion) throw new Error("new Todo is Mandatory!");
-  state.todos.push(new Todo(descripcion));
+const addTodo = (tasks) => {
+  if (!tasks) throw new Error("New Task is Mandatory!");
+  state.todos.unshift(new Todo(tasks));
   savedStateLocalStorage();
 };
 
@@ -84,21 +82,23 @@ const deleteTodo = (todoId) => {
 };
 
 const deleteCompleted = () => {
-  state.todos = state.todos.filter((todo) => todo.done);
+  state.todos = state.todos.filter((todo) => !todo.done);
   savedStateLocalStorage();
 };
 
 /**
- *
- * @param {Filters} newFilter
+ * @param {String} newFilter
  */
+// So that we can filter between completed, pending, all
 const setFilter = (newFilter = Filters.All) => {
   // JS method to trigger objs keys
-  if (Object.keys(Filters).includes(newFilter)) {
-    state.filter = newFilter;
-  } else {
-    throw new Error(`${newFilter} not found!`);
-  }
+  // if (Object.keys(Filters).includes(newFilter)) {
+  //   state.filter = newFilter;
+  //   savedStateLocalStorage();
+  // } else {
+  //   throw new Error(`${newFilter} not found!`);
+  // }
+  state.filter = newFilter;
   savedStateLocalStorage();
 };
 
@@ -108,7 +108,6 @@ const getCurrentFilter = () => {
 
 export default {
   initStore,
-  loadStore,
   getAllTodos,
   addTodo,
   toggleTodo,
