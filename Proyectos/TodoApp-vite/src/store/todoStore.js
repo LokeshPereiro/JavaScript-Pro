@@ -8,21 +8,32 @@ const Filters = {
 
 const state = {
   todos: [
-    new Todo("Aprender Python"),
+    new Todo("Learn Angular"),
     new Todo("Learn TypeScript"),
     new Todo("Aprender Nextjs"),
-    new Todo("Learn Laravel framework"),
+    new Todo("Aprender Python"),
   ],
+  // Default selection
   filter: Filters.All,
 };
 
 const initStore = () => {
-  console.log(state);
   // console.log("Hello World 😁");
+  loadStore();
 };
 
 const loadStore = () => {
-  throw new Error("Not implemented!");
+  if (!localStorage.getItem("myTodos")) return;
+
+  const { todos = [], filter = Filters.All } = JSON.parse(
+    localStorage.getItem("myTodos")
+  );
+  state.todos = todos;
+  state.filter = filter;
+};
+
+const savedStateLocalStorage = () => {
+  localStorage.setItem("myTodos", JSON.stringify(state));
 };
 
 /**
@@ -32,7 +43,7 @@ const loadStore = () => {
  * @param {String} filter, newFilter
  */
 
-// Default filter will be set as 'All'
+// Default filter 'All'
 const getAllTodos = (filter = Filters.All) => {
   switch (filter) {
     case Filters.All:
@@ -53,6 +64,7 @@ const addTodo = (descripcion) => {
   // Mandatory to send new todo
   if (!descripcion) throw new Error("new Todo is Mandatory!");
   state.todos.push(new Todo(descripcion));
+  savedStateLocalStorage();
 };
 
 const toggleTodo = (todoId) => {
@@ -63,14 +75,17 @@ const toggleTodo = (todoId) => {
     }
     return todo;
   });
+  savedStateLocalStorage();
 };
 
 const deleteTodo = (todoId) => {
   state.todos = state.todos.filter((todo) => todo.id !== todoId);
+  savedStateLocalStorage();
 };
 
 const deleteCompleted = () => {
   state.todos = state.todos.filter((todo) => todo.done);
+  savedStateLocalStorage();
 };
 
 /**
@@ -78,11 +93,13 @@ const deleteCompleted = () => {
  * @param {Filters} newFilter
  */
 const setFilter = (newFilter = Filters.All) => {
+  // JS method to trigger objs keys
   if (Object.keys(Filters).includes(newFilter)) {
     state.filter = newFilter;
   } else {
-    throw new Error(`El filtro ${newFilter} no encontrado`);
+    throw new Error(`${newFilter} not found!`);
   }
+  savedStateLocalStorage();
 };
 
 const getCurrentFilter = () => {

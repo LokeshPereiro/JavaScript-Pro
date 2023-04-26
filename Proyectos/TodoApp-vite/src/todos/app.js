@@ -1,14 +1,15 @@
 import todoStore from "../store/todoStore";
+// Importing chuck of html code
 import html from "./app.html?raw";
 import { rederTodos } from "./usecases";
 
-// Storing the html <ul> class
+// Storing the app.html <ul> classes
 const elementIDs = {
   TodoList: ".todo-list",
   NewTodoInput: "#new-todo-input",
 };
 
-// Generally, JS frameworks such as React, Vue, Angular they have this type of syntaxt to initialise their app
+// Generally, JS frameworks such as React, Vue, Angular they have this type of syntax to initialise their app
 export const initApp = () => {
   // Showing all todos once our app has been launched
   const displayTodos = () => {
@@ -18,7 +19,7 @@ export const initApp = () => {
     rederTodos(elementIDs.TodoList, todos);
   };
 
-  // Anonymous function is declared so that we can print out "app.html" elements inside the bodys element <div> with id called #app
+  // Anonymous function is declared so that we can print out "index.html" elements inside the body element <div> with id called #app + security
   (() => {
     const div = document.querySelector("#app");
 
@@ -31,11 +32,11 @@ export const initApp = () => {
   })();
 
   // HTMl Reference
-  const newDescription = document.querySelector(elementIDs.NewTodoInput);
+  const newTodoDesc = document.querySelector(elementIDs.NewTodoInput);
   const ulTodoList = document.querySelector(elementIDs.TodoList);
 
   // Listeners
-  newDescription.addEventListener("keyup", (evt) => {
+  newTodoDesc.addEventListener("keyup", (evt) => {
     // Once we press the Enter Btn stop registering more events
     if (evt.keyCode !== 13) return;
     // If the input field is empty return
@@ -43,6 +44,7 @@ export const initApp = () => {
 
     todoStore.addTodo(evt.target.value);
     displayTodos();
+    // Clean input field
     evt.target.value = "";
   });
 

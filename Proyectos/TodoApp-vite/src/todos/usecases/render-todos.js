@@ -9,6 +9,7 @@ import { createTodo } from "./";
 export const rederTodos = (elementId, todos = []) => {
   //   console.log({ elementId, todos });
 
+  // todo container
   let element;
   // If todos container not selected then asign it by default
   if (!element) element = document.querySelector(elementId);

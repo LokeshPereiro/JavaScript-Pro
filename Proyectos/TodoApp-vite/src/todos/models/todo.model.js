@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 export class Todo {
   /**
-   * @param {String} description
+   * @param {String} description arg
    */
 
   constructor(description) {
